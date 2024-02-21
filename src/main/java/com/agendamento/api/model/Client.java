@@ -13,12 +13,13 @@ public class Client {
     @Id
     private Long id_client;
     private String name;
-    private String endereco;
-    private String cidade;
-    private String telefone;
     private String cpf;
     //opcional
     private String rg;
+    private String endereco;
+    private String cidade;
+    private String telefone;
+
 
 
     @OneToMany

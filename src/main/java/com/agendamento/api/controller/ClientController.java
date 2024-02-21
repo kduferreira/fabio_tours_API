@@ -27,4 +27,10 @@ public class ClientController {
 
 
 
+    //get por cpf
+
+    //get por nome
+
+
+
 }

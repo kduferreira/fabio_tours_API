@@ -20,6 +20,8 @@ public class Rota {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate data;
 
+    @ElementCollection
+    private List<String> cidades;
     
     @OneToMany
     @JoinColumn(name = "id_rota")
