@@ -1,8 +1,10 @@
 package com.agendamento.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,7 +17,8 @@ public class Rota {
     private Long id_rota;
 
     private String destino;
-    private LocalDateTime data;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate data;
 
     
     @OneToMany
