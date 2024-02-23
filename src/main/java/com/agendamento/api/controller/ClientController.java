@@ -1,6 +1,7 @@
 package com.agendamento.api.controller;
 
 import com.agendamento.api.model.Client;
+import com.agendamento.api.service.AgendamentoService;
 import com.agendamento.api.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,8 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
+    @Autowired
+    private AgendamentoService agendamentoService;
 
     @PostMapping
     public ResponseEntity<Client> salvar(@RequestBody Client client) {
@@ -26,6 +29,7 @@ public class ClientController {
         List<Client> clientes = clientService.buscarTodosClientes();
         return ResponseEntity.ok(clientes);
     }
+
 
     @GetMapping("/cpf/{cpf}")
     public ResponseEntity<Client> buscarPorCPF(@PathVariable String cpf) {
@@ -45,6 +49,11 @@ public class ClientController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping("/por-rota/{destino}")
+    public ResponseEntity<List<Client>> buscarClientesPorRota(@PathVariable String destino) {
+        List<Client> clientes = agendamentoService.buscarClientesPorRota(destino);
+        return ResponseEntity.ok(clientes);
     }
 
     @PutMapping("/{id}")

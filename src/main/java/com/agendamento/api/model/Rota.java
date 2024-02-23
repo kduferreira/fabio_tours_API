@@ -1,35 +1,32 @@
-package com.agendamento.api.model;
+    package com.agendamento.api.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.annotation.Nonnull;
-import jakarta.persistence.*;
-import lombok.Data;
+    import com.fasterxml.jackson.annotation.JsonFormat;
+    import jakarta.annotation.Nonnull;
+    import jakarta.persistence.*;
+    import lombok.Data;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
+    import java.time.LocalDate;
+    import java.time.LocalDateTime;
+    import java.util.List;
 
-@Entity
-@Data
-public class Rota {
+    @Entity
+    @Data
+    public class Rota {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_rota;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id_rota;
 
-    private String destino;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate data;
-
-
-    private String onibus;
-
-    @ElementCollection
-    private List<String> cidades;
-    
-    @OneToMany
-    @JoinColumn(name = "id_rota")
-    private List<Agendamento> agendados;
+        private String destino;
+        @JsonFormat(pattern = "yyyy-MM-dd")
+        private LocalDate data;
 
 
-}
+        private String onibus;
+
+        private List<String> cidades;
+
+        @OneToMany(mappedBy = "rota_id") // Uma rota pode ter vários agendamentos
+        private List<Agendamento> agendados;
+
+    }

@@ -26,7 +26,9 @@ public class RotaService {
         Optional<Rota> optionalRota = rotaRepository.findById(id);
         return optionalRota.orElse(null);
     }
-
+    public Rota buscarRotaPorNome(String destino) {
+        return rotaRepository.findByDestino(destino);
+    }
     public Rota atualizarRota(Long id, Rota novaRota) {
         Optional<Rota> optionalRota = rotaRepository.findById(id);
         if (optionalRota.isPresent()) {

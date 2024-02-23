@@ -11,16 +11,20 @@ public class Agendamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Enumerated(EnumType.STRING)
     private Status status;
+
     private Integer poltrona;
 
 
-    private Long id_rota;
-
-    private Long id_client;
+    private Long rota_id;
 
 
+
+    private Long client_id;
+
+    // Getters e setters
 
 
 }

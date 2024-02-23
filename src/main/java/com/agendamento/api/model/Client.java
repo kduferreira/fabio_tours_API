@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.List;
 
 @Entity
-@Data
 public class Client {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +21,9 @@ public class Client {
 
 
 
-    @OneToMany
-    @JoinColumn(name = "id_client")
+    @OneToMany(mappedBy = "client_id") // Um cliente pode ter vários agendamentos
     private List<Agendamento> agendados;
+
 
 
     public Long getId_client() {
