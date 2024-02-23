@@ -10,6 +10,6 @@ RUN mvn clean install
 FROM openjdk:18-jdk-slim
 
 EXPOSE 8080
-COPY --from=build /target/agendamento-api-0.0.1-SNAPSHOT.jar
+COPY --from=build /target/agendamento-api-0.0.1-SNAPSHOT.jar app.js
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
