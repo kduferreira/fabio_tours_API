@@ -2,7 +2,7 @@ package com.agendamento.api.model.Enum;
 
 public enum Status {
 
-    PEDENTE,
+    PENDENTE,
     CONFIRMADO,
     CANCELADO
 }

@@ -1,9 +1,9 @@
 package com.agendamento.api.controller;
 
-
 import com.agendamento.api.model.Agendamento;
-import com.agendamento.api.repository.AgendamentoRepository;
+import com.agendamento.api.service.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,16 +13,33 @@ import java.util.List;
 public class AgendamentoController {
 
     @Autowired
-    private AgendamentoRepository agendamentoRepository;
+    private AgendamentoService agendamentoService;
 
     @PostMapping
-    public Agendamento salvar(@RequestBody Agendamento agendamento){
-        return agendamentoRepository.save(agendamento);
+    public ResponseEntity<Agendamento> salvar(@RequestBody Agendamento agendamento) {
+        Agendamento novoAgendamento = agendamentoService.salvarAgendamento(agendamento);
+        return ResponseEntity.ok(novoAgendamento);
     }
 
     @GetMapping
-    public List<Agendamento>listarTudo(){
-        return agendamentoRepository.findAll();
+    public ResponseEntity<List<Agendamento>> buscarTudo() {
+        List<Agendamento> agendamentos = agendamentoService.buscarTodosAgendamentos();
+        return ResponseEntity.ok(agendamentos);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Agendamento> atualizar(@PathVariable Long id, @RequestBody Agendamento novoAgendamento) {
+        Agendamento agendamentoAtualizado = agendamentoService.atualizarAgendamento(id, novoAgendamento);
+        if (agendamentoAtualizado != null) {
+            return ResponseEntity.ok(agendamentoAtualizado);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        agendamentoService.deletarAgendamento(id);
+        return ResponseEntity.noContent().build();
+    }
 }
